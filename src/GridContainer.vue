@@ -107,12 +107,12 @@ export default {
                 position.w = this.layoutSize.cols - (position.x + position.w - 1)
             }
 
-            if (position.w < this.tileSize.w) {
-                position.w = this.tileSize.w
+            if (position.w < 1) {
+                position.w = 1
             }
 
-            if (position.h < this.tileSize.h) {
-                position.h = this.tileSize.h
+            if (position.h < 1) {
+                position.h = 1
             }
 
             if (position.y < 0) {
