@@ -13,7 +13,10 @@ export default {
             default: false
         },
         layout: {
-            type: Array
+            type: Object,
+            default () {
+                return {}
+            }
         },
         defaultSize: {
             type: Object,
@@ -39,8 +42,7 @@ export default {
         return {
             mounted: false,
             layoutCompleted: false,
-            cells: new Set(),
-            storedLayout: new Map()
+            cells: new Set()
         }
     },
     computed: {
@@ -148,7 +150,7 @@ export default {
         },
         async registerBox (box) {
             box.container = this
-            const storedCoords = this.storedLayout.get(box.boxId)
+            const storedCoords = this.layout[box.boxId]
             if (storedCoords) {
                 box.move(storedCoords.coords)
             } else {
