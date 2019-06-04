@@ -152,7 +152,7 @@ export default {
             box.container = this
             const storedCoords = this.layout[box.boxId]
             if (storedCoords) {
-                box.move(storedCoords.coords)
+                box.move(storedCoords)
             } else {
                 box.move({ ...box.coords, ...this.defaultSize }, true)
             }
