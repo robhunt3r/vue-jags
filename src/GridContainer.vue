@@ -90,6 +90,13 @@ export default {
         }
     },
     methods: {
+        getLayout () {
+            const layout = {}
+            this.$children.forEach(box => {
+                layout[box.boxId] = box.coords
+            })
+            return layout
+        },
         validatePosition (position) {
             let overColumn, overWidth
 

@@ -1,23 +1,27 @@
 <template>
-    <div>
+    <div class="container">
         <div class="head">
             <h1>Grid Container test</h1>
             <button type="button" :class="{ editable: editGrid }" @click="editGrid = !editGrid">Edit</button>
+            <button type="button" :class="{ editable: editGrid }" @click="saveLayout">Save</button>
+            <pre v-if="editGrid">{{ savedLayout }}</pre>
         </div>
 
-        <GridContainer
-                ref="grid"
-                :editable="editGrid"
-                :layout="layout"
-                :tile-size="cellSize"
-                :columns="columns"
-                :rows="rows"
-                :default-size="defaultSize"
-                :margin="margin">
-            <GridBox v-for="(idx, i) in 3" :key="idx" :box-id="i">
-                <h1>{{ i }}</h1>
-            </GridBox>
-        </GridContainer>
+        <div class="body">
+            <GridContainer
+                    ref="grid"
+                    :editable="editGrid"
+                    :layout="layout"
+                    :tile-size="cellSize"
+                    :columns="columns"
+                    :rows="rows"
+                    :default-size="defaultSize"
+                    :margin="margin">
+                <GridBox v-for="idx in 3" :key="idx" :box-id="idx">
+                    <h1>{{ idx }}</h1>
+                </GridBox>
+            </GridContainer>
+        </div>
     </div>
 </template>
 
@@ -29,6 +33,7 @@
         components: { GridContainer, GridBox },
         data() {
             return {
+                savedLayout: {},
                 boxes: 2,
                 editGrid: false,
                 cellSize: {
@@ -45,14 +50,28 @@
                 layout: JSON.parse(localStorage.getItem('layout')) || []
             }
         },
+        methods: {
+            saveLayout () {
+                this.savedLayout = this.$refs.grid.getLayout()
+            }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
-    .head {
-        margin-bottom: 20px;
-        h1 {
-            color: #777;
+    .container {
+        display: flex;
+        flex-direction: row;
+        .head {
+            padding: 24px;
+            h1 {
+                color: #777;
+                font-family: Helvetica;
+            }
+        }
+        .body {
+            width: 100%;
+            text-align: center;
             font-family: Helvetica;
         }
     }
