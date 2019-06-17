@@ -203,8 +203,13 @@ export default {
 
         .box-content {
             position: relative;
-            width: auto;
-            height: 100%;
+            /*width: auto;*/
+            /*height: 100%;*/
+            display: flex;
+            flex-direction: column;
+            & > div {
+                flex-grow: 1;
+            }
         }
 
         .resize-handle {
